@@ -77,5 +77,38 @@ _ =
     suc (suc m + n)
   ∎
 
++-comm : ∀ (m n : ℕ) → m + n ≡ n + m
++-comm m zero =
+  begin
+    m + zero
+  ≡⟨ +-identityʳ m ⟩
+    m
+  ≡⟨⟩
+    zero + m
+  ∎
++-comm m (suc n) =
+  begin
+    m + suc n
+  ≡⟨ +-suc m n ⟩
+    suc (m + n)
+  ≡⟨ cong suc (+-comm m n) ⟩
+    suc (n + m)
+  ≡⟨⟩
+    suc n + m
+  ∎
+
++-rerrange : ∀ (m n p q : ℕ) → (m + n) + (p + q) ≡ m + (n + p) + q
++-rerrange m n p q =
+  begin
+    (m + n) + (p + q)
+  ≡⟨ sym (+-assoc (m + n) p q) ⟩
+    ((m + n) + p) + q
+  ≡⟨ cong (_+ q) (+-assoc m n p) ⟩
+    (m + (n + p)) + q
+  ∎
+
+
+
+
 
 
